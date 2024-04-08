@@ -1,0 +1,64 @@
+Users:
+  type: object
+  properties:
+    user_id:
+      type: integer
+      description: Идентификатор пользователя
+      example: 1
+    username:
+      type: string
+      description: имя пользователя
+      example: "aigiz"
+    password_hash:
+      type: string
+      description: хеш пароля
+      example: "pass"
+    email:
+      type: string
+      description: почта
+      example: "email@gmail.com"
+    role:
+      description: роль
+      type: string
+      example: "user"
+  required:
+    - user_id
+    - username
+    - password_hash
+    - email
+    - role
+
+UsersResponse:
+  type: object
+  properties:
+    data:
+      $ref: '#/Users'
+    meta:
+      type: object
+  required:
+    - data
+
+CreateUsersRequest:
+  type: object
+  properties:
+    username:
+      type: string
+      description: имя пользователя
+      example: "aigiz"
+    password_hash:
+      type: string
+      description: хеш пароля
+      example: "pass"
+    email:
+      type: string
+      description: почта
+      example: "email@gmail.com"
+    role:
+      description: роль
+      type: string
+      example: "user"
+  required:
+    - username
+    - password_hash
+    - email
+    - role

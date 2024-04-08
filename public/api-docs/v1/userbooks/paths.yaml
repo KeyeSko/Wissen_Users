@@ -1,0 +1,48 @@
+UserBooksOne:
+  get:
+    tags:
+      - userbooks
+    operationId: getUserBooks
+    x-lg-handler: 'App\Http\ApiV1\Modules\UserBooks\Controllers\UserBooksController@get'
+    x-lg-skip-request-generation: true
+    summary: Получение объекта типа книги пользователя
+    description: Получение объекта типа книги пользователя
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Успешный ответ
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/userbooks.yaml#/UserBooksResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+
+UserBooks:
+  post:
+    tags:
+      - userbooks
+    operationId: createUserBooks
+    summary: Запрос на создание книги пользователя
+    description: Запрос на создание книги пользователя
+    x-lg-handler: 'App\Http\ApiV1\Modules\UserBooks\Controllers\UserBooksController@create'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/userbooks.yaml#/CreateUserBooksRequest'
+    responses:
+      "201":
+        description: Выполнено успешно
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/userbooks.yaml#/UserBooksResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'

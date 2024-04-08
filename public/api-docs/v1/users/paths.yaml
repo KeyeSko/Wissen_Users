@@ -1,0 +1,48 @@
+UsersOne:
+  get:
+    tags:
+      - users
+    operationId: getUsers
+    x-lg-handler: 'App\Http\ApiV1\Modules\Users\Controllers\UsersController@get'
+    x-lg-skip-request-generation: true
+    summary: Получение объекта типа Users
+    description: Получение объекта типа Users
+    parameters:
+      - $ref: '../index.yaml#/components/parameters/PathId'
+    responses:
+      "200":
+        description: Успешный ответ
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/users.yaml#/UsersResponse'
+      "404":
+        $ref: '../index.yaml#/components/responses/NotFound'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
+
+Users:
+  post:
+    tags:
+      - users
+    operationId: createUsers
+    summary: Запрос на создание пользователя
+    description: Запрос на создание пользователя
+    x-lg-handler: 'App\Http\ApiV1\Modules\Users\Controllers\UsersController@create'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: './schemas/users.yaml#/CreateUsersRequest'
+    responses:
+      "201":
+        description: Выполнено успешно
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/users.yaml#/UsersResponse'
+      "400":
+        $ref: '../index.yaml#/components/responses/BadRequest'
+      "500":
+        $ref: '../index.yaml#/components/responses/ServerError'
