@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\UserBooks\Models\UserBooks;
+use App\Domain\Users\Models\Users;
 use App\Http\ApiV1\Support\Tests\ApiV1ComponentTestCase;
 
 use function Pest\Laravel\assertDatabaseHas;
@@ -10,53 +11,41 @@ use function Pest\Laravel\postJson;
 uses(ApiV1ComponentTestCase::class);
 uses()->group('component');
 
-test('POST /api/v1/UserBooks/UserBooks create success', function () {
+test('POST /api/v1/userbooks/userbooks create success', function () {
+    $user = Users::factory()->create();
     $request = [
-        'username' => 'Test username',
-        'password_hash' => 'test UserBooks password_hash',
-        'email' => 'test UserBooks email',
-        'role' => 'test UserBooks role',
+        'user_id' => $user->id,
+        'book_id' => 3,
+        'status' => 'Reading',
+        'read_date' => '2024-01-01',
+        'abandon_date' => '2024-01-01',
+        'rating' => '5',
     ];
-
-    postJson('/api/v1/UserBooks/UserBooks', $request)
+    //$this->withoutExceptionHandling();
+    //postJson('/api/v1/users/users', $user)
+    postJson('/api/v1/userbooks/userbooks', $request)
         ->assertStatus(201)
-        ->assertJsonPath('data.username', $request['username'])
-        ->assertJsonPath('data.password_hash', $request['password_hash'])
-        ->assertJsonPath('data.email', $request['email'])
-        ->assertJsonPath('data.role', $request['role']);
+        ->assertJsonPath('data.user_id', $request['user_id'])
+        ->assertJsonPath('data.book_id', $request['book_id'])
+        ->assertJsonPath('data.status', $request['status'])
+        ->assertJsonPath('data.read_date', $request['read_date'])
+        ->assertJsonPath('data.abandon_date', $request['abandon_date']);
 
     assertDatabaseHas(UserBooks::class, [
-        'username' => $request['username'],
+        'user_id' => $request['user_id'],
     ]);
 });
 
-test('GET /api/v1/UserBooks/UserBooks/{id} get UserBooks success', function () {
+test('GET /api/v1/userbooks/userbooks/{id} get userbooks success', function () {
     /** @var UserBooks $UserBooks */
-    $UserBooks = UserBooks::factory()->create();
+    $user = Users::factory()->create();
+    $userbooks = UserBooks::factory()->create();
 
-    getJson("/api/v1/UserBooks/UserBooks/{$UserBooks->id}")
+    getJson("/api/v1/userbooks/userbooks/{$userbooks->id}")
         ->assertStatus(200)
-        ->assertJsonPath('data.username', $UserBooks->username)
-        ->assertJsonPath('data.password_hash', $UserBooks->password_hash)
-        ->assertJsonPath('data.email', $UserBooks->email)
-        ->assertJsonPath('data.role', $UserBooks->role);
-});    
-test('POST /api/v1/userbooks/userbooks 201', function () {
-    postJson('/api/v1/userbooks/userbooks')
-        ->assertStatus(201);
-});
-
-test('POST /api/v1/userbooks/userbooks 400', function () {
-    postJson('/api/v1/userbooks/userbooks')
-        ->assertStatus(400);
-});
-
-test('GET /api/v1/userbooks/userbooks/{id} 200', function () {
-    getJson('/api/v1/userbooks/userbooks/{id}')
-        ->assertStatus(200);
-});
-
-test('GET /api/v1/userbooks/userbooks/{id} 404', function () {
-    getJson('/api/v1/userbooks/userbooks/{id}')
-        ->assertStatus(404);
+        ->assertJsonPath('data.user_id', $userbooks->user_id)
+        ->assertJsonPath('data.book_id', $userbooks->book_id)
+        ->assertJsonPath('data.status', $userbooks->status)
+        ->assertJsonPath('data.read_date', $userbooks->read_date)
+        ->assertJsonPath('data.abandon_date', $userbooks->abandon_date);
 });

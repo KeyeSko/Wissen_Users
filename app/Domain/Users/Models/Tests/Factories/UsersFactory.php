@@ -12,10 +12,10 @@ class UsersFactory extends BaseModelFactory
     public function definition(): array
     {
         return [
-            'username' => $this->faker->userName(),
+            'username' => $this->faker->name(),
             'password_hash' => $this->faker->text(10),
-            'email' => $this->faker->text(15),
-            'role' => $this->faker->text(5),
+            'email' => $this->faker->email(),
+            'role' => "user",
         ];
     }
 }
