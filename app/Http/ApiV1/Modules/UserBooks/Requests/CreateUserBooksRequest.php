@@ -12,6 +12,8 @@ class CreateUserBooksRequest extends BaseFormRequest
             'status' => ['required', 'string'],
             'book_id' => ['required', 'integer'],
             'user_id' => ['required', 'integer'],
+            'read_date' => ['nullable', 'date'],
+            'abandon_date' => ['nullable', 'date'],
         ];
     }
 }

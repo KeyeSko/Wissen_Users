@@ -1,7 +1,7 @@
 Users:
   type: object
   properties:
-    user_id:
+    id:
       type: integer
       description: Идентификатор пользователя
       example: 1
@@ -22,7 +22,7 @@ Users:
       type: string
       example: "user"
   required:
-    - user_id
+    - id
     - username
     - password_hash
     - email

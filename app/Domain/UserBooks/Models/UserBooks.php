@@ -10,7 +10,7 @@ class UserBooks extends Model
 {
     protected $table = 'userbooks';
 
-    protected $primaryKey = 'record_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'user_id',
@@ -20,6 +20,7 @@ class UserBooks extends Model
         'abandon_date',
         'rating'
     ];
+
 
     // Определите отношение между книгой и ее владельцем (пользователем)
     public function users()

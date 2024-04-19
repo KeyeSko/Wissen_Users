@@ -15,14 +15,14 @@ class UsersQuery extends QueryBuilder
         parent::__construct(Users::query());
 
         // Разрешить сортировать по параметрам
-        $this->allowedSorts(['user_id', 'username']);
+        $this->allowedSorts(['id', 'username']);
 
         // Сортировка по умолчанию
-        $this->defaultSort('-user_id');
+        $this->defaultSort('-id');
 
         // Разрешить поиск по параметрам
         $this->allowedFilters([
-            AllowedFilter::exact('user_id'),
+            AllowedFilter::exact('id'),
             AllowedFilter::exact('username'),
 
             //...DateFilter::make('created_at')->exact()->lte()->gte(),

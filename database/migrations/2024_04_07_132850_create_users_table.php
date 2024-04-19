@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('id');
             $table->string('username', 50)->unique();
             $table->string('password_hash', 128);
             $table->string('email', 100)->unique();
@@ -21,7 +21,7 @@ return new class extends Migration
         });
 
         Schema::create('userbooks', function (Blueprint $table) {
-            $table->id('record_id');
+            $table->id('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
             $table->string('status', 50)->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->integer('rating')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -13,12 +13,13 @@ class UserBooksResource extends BaseJsonResource
     {
         // todo
         return [
-            'record_id' => $this->record_id,
+            'id' => $this->id,
             'user_id' => $this->user_id,
             'book_id' => $this->book_id,
             'status' => $this->status,
             'read_date' => $this->read_date,
             'abandon_date' => $this->abandon_date,
+            'rating' => $this->rating,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
         ];
