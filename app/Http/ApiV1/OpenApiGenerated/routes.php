@@ -13,3 +13,4 @@ Route::post('users/users', [UsersController::class, 'create']);
 Route::get('users/users/{id}', [UsersController::class, 'get']);
 Route::post('userbooks/userbooks', [UserBooksController::class, 'create']);
 Route::get('userbooks/userbooks/{id}', [UserBooksController::class, 'get']);
+Route::get('userbooks/userbooks1/{id}', [UserBooksController::class, 'getBooks']);
